@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web1:
+    restart: on-failure
+    build: 
+      context: ./Node
+    ports:
+      - '81:5000'
+  web2:
+    restart: on-failure
+    build: 
+      context: ./Node2
+    ports:
+      - '82:5000'
+  nginx:
+    build: 
+      context: ./Nginx
+    ports:
+    - '80:80'
+    depends_on:
+    - web1
+    - web2
